@@ -1,0 +1,4118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Literary Club Portal</title>
+
+<link rel="icon"
+href="https://cdn.phototourl.com/free/2026-05-24-d10d2a5f-f517-4a2b-b674-cb4bfb9122d5.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+	<style>
+		
+/* =====================================================
+GLOBAL
+===================================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+:root{
+
+--gold:#d4b26a;
+--dark:#07111f;
+--dark2:#0c1729;
+--card:#0f1d31;
+--light:#ffffff;
+--text:#d7d7d7;
+--green:#2ecc71;
+--red:#e74c3c;
+--blue:#3498db;
+--shadow:0 10px 35px rgba(0,0,0,.35);
+
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:
+linear-gradient(135deg,#02060d,#07111f,#09172d);
+
+color:white;
+
+overflow-x:hidden;
+
+}
+
+/* =====================================================
+LOADING SCREEN
+===================================================== */
+
+#loadingScreen{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+
+background:#050b14;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:999999;
+
+}
+
+.loading-content{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
+
+}
+
+.loader-circle{
+
+width:75px;
+height:75px;
+
+border-radius:50%;
+
+border:6px solid rgba(255,255,255,.08);
+
+border-top:6px solid var(--gold);
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+0%{
+transform:rotate(0deg);
+}
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+/* =====================================================
+LOGIN PAGE
+===================================================== */
+
+#loginPage{
+
+width:100%;
+height:100vh;
+
+position:fixed;
+top:0;
+left:0;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+
+z-index:99999;
+
+background:
+url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1920')
+center/cover;
+
+}
+
+.login-overlay{
+
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(rgba(0,0,0,.78),
+rgba(0,0,0,.88));
+
+}
+
+.login-box{
+
+position:relative;
+
+width:420px;
+max-width:92%;
+
+padding:45px;
+
+border-radius:32px;
+
+background:rgba(7,17,31,.78);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:var(--shadow);
+
+animation:fadeUp 1s ease;
+
+}
+
+.logo{
+
+width:125px;
+height:125px;
+
+margin:auto;
+margin-bottom:28px;
+
+border-radius:50%;
+
+overflow:hidden;
+
+border:3px solid var(--gold);
+
+}
+
+.logo img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.login-title{
+
+font-family:'Cinzel',serif;
+
+font-size:42px;
+
+text-align:center;
+
+color:var(--gold);
+
+margin-bottom:10px;
+
+}
+
+.login-subtitle{
+
+text-align:center;
+
+color:#d2d2d2;
+
+margin-bottom:30px;
+
+line-height:1.8;
+
+}
+
+.input-box{
+
+margin-bottom:18px;
+
+}
+
+.input-box input{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+outline:none;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+color:white;
+
+font-size:15px;
+
+}
+
+.login-btn,
+.fingerprint-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.35s;
+
+margin-top:12px;
+
+}
+
+.login-btn{
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8a6420);
+
+}
+
+.fingerprint-btn{
+
+background:
+rgba(255,255,255,.06);
+
+color:white;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.login-btn:hover,
+.fingerprint-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.35);
+
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+header{
+
+width:100%;
+
+position:fixed;
+top:0;
+
+background:
+rgba(3,9,17,.82);
+
+backdrop-filter:blur(12px);
+
+z-index:999;
+
+border-bottom:
+1px solid rgba(255,255,255,.05);
+
+}
+
+.navbar{
+
+width:92%;
+
+margin:auto;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:16px 0;
+
+}
+
+.brand{
+
+display:flex;
+align-items:center;
+gap:14px;
+
+}
+
+.brand img{
+
+width:58px;
+height:58px;
+
+border-radius:50%;
+
+border:2px solid var(--gold);
+
+}
+
+.brand h2{
+
+font-family:'Cinzel',serif;
+
+color:var(--gold);
+
+font-size:28px;
+
+}
+
+.brand-sub{
+
+font-size:12px;
+color:#bbb;
+
+margin-top:4px;
+
+letter-spacing:1px;
+
+}
+
+.nav-links{
+
+display:flex;
+align-items:center;
+gap:25px;
+
+}
+
+.nav-links a{
+
+color:white;
+
+text-decoration:none;
+
+position:relative;
+
+transition:.3s;
+
+}
+
+.nav-links a::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+bottom:-5px;
+
+width:0%;
+height:2px;
+
+background:var(--gold);
+
+transition:.35s;
+
+}
+
+.nav-links a:hover{
+
+color:var(--gold);
+
+}
+
+.nav-links a:hover::after{
+
+width:100%;
+
+}
+
+.logout-btn{
+
+padding:11px 18px;
+
+border:none;
+
+border-radius:14px;
+
+background:var(--gold);
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+.menu-toggle{
+
+display:none;
+
+font-size:32px;
+
+cursor:pointer;
+
+}
+
+/* =====================================================
+NOTIFICATION
+===================================================== */
+
+.notification-bell{
+
+position:relative;
+
+font-size:24px;
+
+cursor:pointer;
+
+}
+
+.notification-count{
+
+position:absolute;
+
+top:-8px;
+right:-10px;
+
+width:22px;
+height:22px;
+
+border-radius:50%;
+
+background:red;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:11px;
+font-weight:700;
+
+}
+
+/* =====================================================
+HERO
+===================================================== */
+
+.hero{
+
+position:relative;
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+padding:140px 8% 100px;
+
+background:
+url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1920')
+center/cover;
+
+}
+
+.hero-overlay{
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(rgba(0,0,0,.76),
+rgba(0,0,0,.84));
+
+}
+
+.hero-content{
+
+position:relative;
+
+max-width:950px;
+
+z-index:2;
+
+}
+
+.hero-content h1{
+
+font-size:74px;
+
+font-family:'Cinzel',serif;
+
+line-height:1.25;
+
+}
+
+.hero-content h1 span{
+
+color:var(--gold);
+
+}
+
+.hero-content p{
+
+margin-top:28px;
+
+line-height:2;
+
+font-size:17px;
+
+color:#ddd;
+
+}
+
+.hero-buttons{
+
+display:flex;
+justify-content:center;
+gap:18px;
+
+margin-top:40px;
+
+flex-wrap:wrap;
+
+}
+
+.hero-btn{
+
+padding:15px 28px;
+
+border:none;
+
+border-radius:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.gold-btn{
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8b641f);
+
+}
+
+.dark-btn{
+
+background:
+rgba(255,255,255,.08);
+
+color:white;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.hero-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* =====================================================
+SECTIONS
+===================================================== */
+
+section{
+
+padding:110px 8%;
+
+}
+
+.section-title{
+
+text-align:center;
+
+margin-bottom:60px;
+
+}
+
+.section-title h2{
+
+font-size:44px;
+
+font-family:'Cinzel',serif;
+
+color:var(--gold);
+
+margin-bottom:12px;
+
+}
+
+.section-title p{
+
+color:#bbb;
+
+letter-spacing:1px;
+
+}
+
+/* =====================================================
+CARDS
+===================================================== */
+
+.cards,
+.event-container,
+.file-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:30px;
+
+}
+
+.card,
+.event-card,
+.file-card{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:28px;
+
+overflow:hidden;
+
+transition:.4s;
+
+backdrop-filter:blur(12px);
+
+box-shadow:var(--shadow);
+
+}
+
+.card:hover,
+.event-card:hover,
+.file-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card{
+
+padding:32px;
+
+}
+
+.card h3{
+
+color:var(--gold);
+
+margin-bottom:22px;
+
+font-size:24px;
+
+}
+
+.card ul{
+
+list-style:none;
+
+}
+
+.card ul li{
+
+padding:14px 0;
+
+border-bottom:
+1px solid rgba(255,255,255,.08);
+
+line-height:1.8;
+
+}
+
+/* =====================================================
+EVENTS
+===================================================== */
+
+.event-img{
+
+height:230px;
+
+background-size:cover;
+background-position:center;
+
+}
+
+.event-content{
+
+padding:28px;
+
+}
+
+.event-content h3{
+
+color:var(--gold);
+
+margin-bottom:12px;
+
+font-size:24px;
+
+}
+
+.progress-bar{
+
+width:100%;
+height:13px;
+
+border-radius:20px;
+
+background:#1b2c42;
+
+overflow:hidden;
+
+margin-top:20px;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+background:
+linear-gradient(90deg,
+#2ecc71,
+#27ae60);
+
+width:0%;
+
+}
+
+/* =====================================================
+BUTTONS
+===================================================== */
+
+.action-btn{
+
+padding:11px 16px;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.35s;
+
+margin-top:18px;
+margin-right:10px;
+
+}
+
+.edit-btn{
+
+background:var(--gold);
+
+}
+
+.delete-btn{
+
+background:var(--red);
+
+color:white;
+
+}
+
+.done-btn{
+
+background:var(--green);
+
+color:white;
+
+}
+
+.action-btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* =====================================================
+MESSAGES
+===================================================== */
+
+.message-box{
+
+background:
+rgba(255,255,255,.05);
+
+padding:24px;
+
+border-radius:22px;
+
+margin-bottom:20px;
+
+border-left:4px solid var(--gold);
+
+backdrop-filter:blur(10px);
+
+transition:.35s;
+
+}
+
+.message-box:hover{
+
+transform:translateY(-4px);
+
+}
+
+.message-box h3{
+
+color:var(--gold);
+
+margin-bottom:10px;
+
+}
+
+/* =====================================================
+FILES
+===================================================== */
+
+.file-card{
+
+padding:25px;
+
+position:relative;
+
+}
+
+.file-icon{
+
+font-size:46px;
+
+margin-bottom:18px;
+
+}
+
+.file-card h3{
+
+color:var(--gold);
+
+margin-bottom:12px;
+
+}
+
+.file-card p{
+
+color:#ccc;
+
+line-height:1.8;
+
+}
+
+.file-meta{
+
+margin-top:18px;
+
+font-size:13px;
+
+color:#9f9f9f;
+
+}
+
+.file-top-bar{
+
+display:flex;
+justify-content:flex-end;
+
+margin-bottom:30px;
+
+}
+
+.upload-file-btn{
+
+padding:14px 20px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8b641f);
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+/* =====================================================
+ADMIN MENU
+===================================================== */
+
+#adminFloating{
+
+position:fixed;
+
+right:25px;
+bottom:25px;
+
+z-index:9999;
+
+display:none;
+
+}
+
+.admin-main-btn{
+
+width:74px;
+height:74px;
+
+border:none;
+
+border-radius:50%;
+
+font-size:28px;
+
+cursor:pointer;
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8a6420);
+
+transition:.4s;
+
+}
+
+.admin-main-btn:hover{
+
+transform:
+rotate(90deg)
+scale(1.06);
+
+}
+
+.admin-menu{
+
+position:absolute;
+
+bottom:95px;
+right:0;
+
+width:290px;
+
+padding:24px;
+
+border-radius:24px;
+
+background:#0c1728;
+
+display:none;
+
+box-shadow:var(--shadow);
+
+}
+
+.admin-menu button{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:12px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+rgba(255,255,255,.06);
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.admin-menu button:hover{
+
+background:
+rgba(255,255,255,.12);
+
+}
+
+/* =====================================================
+MODAL
+===================================================== */
+
+.modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100vh;
+
+background:
+rgba(0,0,0,.75);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+z-index:999999;
+
+}
+
+.modal-box{
+
+width:100%;
+max-width:700px;
+
+background:#081320;
+
+padding:35px;
+
+border-radius:30px;
+
+max-height:92vh;
+
+overflow-y:auto;
+
+box-shadow:var(--shadow);
+
+}
+
+.modal-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+.modal-header h2{
+
+color:var(--gold);
+
+font-size:32px;
+
+font-family:'Cinzel',serif;
+
+}
+
+.modal-close-btn{
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:24px;
+
+cursor:pointer;
+
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:18px;
+
+border:none;
+outline:none;
+
+border-radius:14px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+color:white;
+
+}
+
+.modal-box textarea{
+
+height:140px;
+
+resize:none;
+
+}
+
+.modal-buttons{
+
+display:flex;
+gap:15px;
+
+}
+
+.modal-buttons button{
+
+flex:1;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+.save-btn{
+
+background:var(--gold);
+
+}
+
+.close-btn{
+
+background:#243447;
+
+color:white;
+
+}
+
+/* =====================================================
+POPUP NOTIFICATION
+===================================================== */
+
+.popup-notification{
+
+position:fixed;
+
+top:30px;
+right:30px;
+
+background:#0d1a2c;
+
+padding:20px;
+
+border-radius:20px;
+
+display:none;
+
+min-width:320px;
+
+z-index:999999;
+
+box-shadow:var(--shadow);
+
+border-left:4px solid var(--gold);
+
+animation:popupFade .5s ease;
+
+}
+
+.popup-inner{
+
+display:flex;
+align-items:center;
+gap:18px;
+
+}
+
+.popup-icon{
+
+font-size:30px;
+
+}
+
+@keyframes popupFade{
+
+from{
+opacity:0;
+transform:translateY(-20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* =====================================================
+FINGERPRINT
+===================================================== */
+
+.fingerprint-screen{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100vh;
+
+background:
+rgba(0,0,0,.82);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+z-index:999999;
+
+}
+
+.fingerprint-box{
+
+width:420px;
+max-width:92%;
+
+padding:40px;
+
+background:#091321;
+
+border-radius:30px;
+
+text-align:center;
+
+}
+
+.fingerprint-icon{
+
+font-size:72px;
+
+margin-bottom:20px;
+
+color:var(--gold);
+
+}
+
+.fingerprint-box h2{
+
+font-family:'Cinzel',serif;
+
+color:var(--gold);
+
+margin-bottom:15px;
+
+}
+
+.fingerprint-box p{
+
+line-height:1.9;
+
+color:#ccc;
+
+margin-bottom:28px;
+
+}
+
+.fingerprint-confirm-btn,
+.fingerprint-close-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:14px;
+
+cursor:pointer;
+
+font-weight:700;
+
+margin-bottom:14px;
+
+}
+
+.fingerprint-confirm-btn{
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8a6420);
+
+}
+
+.fingerprint-close-btn{
+
+background:#233447;
+
+color:white;
+
+}
+
+/* =====================================================
+FILE UPLOAD MODAL
+===================================================== */
+
+.file-upload-modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100vh;
+
+background:
+rgba(0,0,0,.78);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+z-index:999999;
+
+}
+
+.file-upload-box{
+
+width:100%;
+max-width:650px;
+
+padding:35px;
+
+border-radius:28px;
+
+background:#091423;
+
+}
+
+.upload-confirm-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(135deg,
+var(--gold),
+#8b641f);
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+/* =====================================================
+FOOTER
+===================================================== */
+
+footer{
+
+padding:45px 20px;
+
+text-align:center;
+
+background:#03070d;
+
+margin-top:80px;
+
+}
+
+.footer-content h2{
+
+font-family:'Cinzel',serif;
+
+color:var(--gold);
+
+margin-bottom:14px;
+
+}
+
+.footer-content p{
+
+color:#bbb;
+
+line-height:2;
+
+}
+
+.footer-credit{
+
+margin-top:18px;
+
+font-size:13px;
+
+letter-spacing:1px;
+
+}
+
+/* =====================================================
+ANIMATIONS
+===================================================== */
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:950px){
+
+.nav-links{
+
+position:absolute;
+
+top:88px;
+right:20px;
+
+width:250px;
+
+padding:25px;
+
+border-radius:22px;
+
+background:
+rgba(4,10,18,.97);
+
+display:none;
+
+flex-direction:column;
+align-items:flex-start;
+
+box-shadow:var(--shadow);
+
+animation:menuFade .3s ease;
+
+}
+
+.nav-links.active{
+
+display:flex;
+
+}
+
+.menu-toggle{
+
+display:block;
+
+}
+
+.hero-content h1{
+
+font-size:50px;
+
+}
+
+.cards,
+.event-container,
+.file-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.hero-content h1{
+
+font-size:38px;
+
+line-height:1.4;
+
+}
+
+.hero-content p{
+
+font-size:15px;
+
+line-height:1.9;
+
+}
+
+.section-title h2{
+
+font-size:34px;
+
+}
+
+.modal-box{
+
+padding:25px;
+
+}
+
+.brand h2{
+
+font-size:22px;
+
+}
+
+.brand img{
+
+width:50px;
+height:50px;
+
+}
+
+}
+
+@media(max-width:550px){
+
+.login-box{
+
+padding:35px 24px;
+
+}
+
+.hero{
+
+padding-top:160px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+}
+
+.hero-btn{
+
+width:100%;
+
+}
+
+.popup-notification{
+
+right:15px;
+left:15px;
+
+min-width:auto;
+
+}
+
+.admin-menu{
+
+width:240px;
+
+}
+
+}
+
+@keyframes menuFade{
+
+from{
+opacity:0;
+transform:translateY(-15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+	</style>
+
+<!-- =====================================================
+LOADING SCREEN
+===================================================== -->
+
+<div id="loadingScreen">
+
+<div class="loading-content">
+
+<div class="loader-circle"></div>
+
+<h2>
+Connecting To Cloud Portal...
+</h2>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage">
+
+<div class="login-overlay"></div>
+
+<div class="login-box">
+
+<div class="logo">
+<img src="https://cdn.phototourl.com/free/2026-05-24-d10d2a5f-f517-4a2b-b674-cb4bfb9122d5.png">
+</div>
+
+<h1 class="login-title">
+Literary Club
+</h1>
+
+<p class="login-subtitle">
+Official Cloud Portal
+</p>
+
+<div class="input-box">
+
+<input
+type="text"
+id="username"
+placeholder="Enter Username">
+
+</div>
+
+<div class="input-box">
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+</div>
+
+<button class="login-btn" onclick="login()">
+Enter Portal
+</button>
+
+<button
+class="fingerprint-btn"
+onclick="openFingerprintSettings()">
+
+Enable Fingerprint Login
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+MAIN WEBSITE
+===================================================== -->
+
+<div id="mainWebsite" style="display:none;">
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
+<header>
+
+<div class="navbar">
+
+<div class="brand">
+
+<img src="https://cdn.phototourl.com/free/2026-05-24-d10d2a5f-f517-4a2b-b674-cb4bfb9122d5.png">
+
+<div>
+
+<h2>Literary Club</h2>
+
+<p class="brand-sub">
+Official Portal
+</p>
+
+</div>
+
+</div>
+
+<div
+class="menu-toggle"
+onclick="toggleMobileMenu()">
+
+☰
+
+</div>
+
+<div class="nav-links">
+
+<a href="#home">Home</a>
+
+<a href="#members">Members</a>
+
+<a href="#events">Events</a>
+
+<a href="#messages">Messages</a>
+
+<a href="#files">Files</a>
+
+<div
+class="notification-bell"
+onclick="openInbox()">
+
+🔔
+
+<div
+class="notification-count"
+id="notifyCount">
+
+0
+
+</div>
+
+</div>
+
+<button
+class="logout-btn"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- =====================================================
+HERO SECTION
+===================================================== -->
+
+<section class="hero" id="home">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<h1>
+
+Where
+<span>Words</span>
+Become Eternal
+
+</h1>
+
+<p>
+
+The Official Literary Club Cloud Portal —
+A protected digital sanctuary for imagination,
+creativity, literature, poetry, events,
+communication, archives and collaboration.
+
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="hero-btn gold-btn"
+onclick="openInbox()">
+
+Open Inbox
+
+</button>
+
+<button
+class="hero-btn dark-btn"
+onclick="scrollToEvents()">
+
+Explore Events
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+MEMBERS SECTION
+===================================================== -->
+
+<section id="members">
+
+<div class="section-title">
+
+<h2>
+Club Members
+</h2>
+
+<p>
+Leadership • Committee • Coordinators • Members
+</p>
+
+</div>
+
+<div
+class="cards"
+id="memberCards">
+
+</div>
+
+</section>
+
+<!-- =====================================================
+EVENTS SECTION
+===================================================== -->
+
+<section id="events">
+
+<div class="section-title">
+
+<h2>
+Events & Progress
+</h2>
+
+<p>
+Track literary activities and event execution
+</p>
+
+</div>
+
+<div
+class="event-container"
+id="eventContainer">
+
+</div>
+
+</section>
+
+<!-- =====================================================
+MESSAGES SECTION
+===================================================== -->
+
+<section id="messages">
+
+<div class="section-title">
+
+<h2>
+Club Messages
+</h2>
+
+<p>
+Official notices and internal communication
+</p>
+
+</div>
+
+<div id="messageContainer"></div>
+
+</section>
+
+<!-- =====================================================
+FILES SECTION
+===================================================== -->
+
+<section id="files">
+
+<div class="section-title">
+
+<h2>
+Cloud File Vault
+</h2>
+
+<p>
+Permanent synchronized cloud storage
+</p>
+
+</div>
+
+<div class="file-top-bar">
+
+<button
+class="upload-file-btn"
+id="uploadFileBtn"
+onclick="openFileUpload()">
+
+Upload File
+
+</button>
+
+</div>
+
+<div
+class="file-grid"
+id="fileContainer">
+
+</div>
+
+</section>
+
+<!-- =====================================================
+ACTIVITY LOGS
+===================================================== -->
+
+<section id="activityLogs">
+
+<div class="section-title">
+
+<h2>
+Activity Logs
+</h2>
+
+<p>
+Portal actions and system records
+</p>
+
+</div>
+
+<div id="activityContainer"></div>
+
+</section>
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-content">
+
+<h2>
+Literary Club Portal
+</h2>
+
+<p>
+Official Institutional Cloud Workspace
+</p>
+
+<p class="footer-credit">
+Developed For Literary Excellence
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+<!-- =====================================================
+ADMIN FLOATING BUTTON
+===================================================== -->
+
+<div id="adminFloating">
+
+<button
+class="admin-main-btn"
+onclick="toggleAdminMenu()">
+
+⚙
+
+</button>
+
+<div
+class="admin-menu"
+id="adminMenu">
+
+<button onclick="openMemberEditor()">
+Manage Members
+</button>
+
+<button onclick="openEventEditor()">
+Add Event
+</button>
+
+<button onclick="openMessageEditor()">
+Send Message
+</button>
+
+<button onclick="openArchive()">
+Archived Events
+</button>
+
+<button onclick="openCredentialManager()">
+Manage Credentials
+</button>
+
+<button onclick="openFileUpload()">
+Upload Files
+</button>
+
+<button onclick="openPortalSettings()">
+Portal Settings
+</button>
+
+<button
+id="historyBtn"
+onclick="openMessageHistory()">
+
+Message History
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+MODAL
+===================================================== -->
+
+<div
+class="modal"
+id="modal"
+onclick="outsideClose(event)">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<h2 id="modalTitle"></h2>
+
+<button
+class="modal-close-btn"
+onclick="closeModal()">
+
+✖
+
+</button>
+
+</div>
+
+<div id="modalBody"></div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+POPUP NOTIFICATION
+===================================================== -->
+
+<div
+class="popup-notification"
+id="popupNotification">
+
+<div class="popup-inner">
+
+<div class="popup-icon">
+🔔
+</div>
+
+<div>
+
+<h3 id="popupTitle">
+New Notification
+</h3>
+
+<p id="popupText">
+Message Received
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+FINGERPRINT AUTH SCREEN
+===================================================== -->
+
+<div
+class="fingerprint-screen"
+id="fingerprintScreen">
+
+<div class="fingerprint-box">
+
+<div class="fingerprint-icon">
+🔐
+</div>
+
+<h2>
+Fingerprint Authentication
+</h2>
+
+<p>
+Use your registered mobile fingerprint
+for additional portal security
+</p>
+
+<button
+class="fingerprint-confirm-btn"
+onclick="registerFingerprint()">
+
+Register Fingerprint
+
+</button>
+
+<button
+class="fingerprint-close-btn"
+onclick="closeFingerprintScreen()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+FILE UPLOAD MODAL
+===================================================== -->
+
+<div
+class="file-upload-modal"
+id="fileUploadModal">
+
+<div class="file-upload-box">
+
+<div class="modal-header">
+
+<h2>
+Upload Cloud File
+</h2>
+
+<button
+class="modal-close-btn"
+onclick="closeFileUpload()">
+
+✖
+
+</button>
+
+</div>
+
+<input
+type="text"
+id="fileTitle"
+placeholder="File Title">
+
+<input
+type="file"
+id="realFile">
+
+<textarea
+id="fileDescription"
+placeholder="File Description"></textarea>
+
+<button
+class="upload-confirm-btn"
+onclick="uploadPortalFile()">
+
+Upload File
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+HIDDEN INPUTS / SYSTEM
+===================================================== -->
+
+<input
+type="hidden"
+id="currentRole">
+
+<input
+type="hidden"
+id="currentUser">
+
+<!-- =====================================================
+MAIN SCRIPT LINK
+(JS WILL COME LATER)
+===================================================== -->
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyDk2RM_mNdRmNL84sL-zyF7MzhRlzsl27M",
+authDomain:"literary-club-portal.firebaseapp.com",
+projectId:"literary-club-portal",
+storageBucket:"literary-club-portal.firebasestorage.app",
+messagingSenderId:"333561585242",
+appId:"1:333561585242:web:02e8e8f6b24b197caa8263",
+measurementId:"G-9WER2ZR22Q"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+const loading=document.createElement("div");
+
+loading.id="loadingScreen";
+
+loading.innerHTML=`
+
+<div style="
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
+">
+
+<div style="
+width:70px;
+height:70px;
+border:6px solid rgba(255,255,255,.08);
+border-top:6px solid #d4b26a;
+border-radius:50%;
+animation:spin 1s linear infinite;
+"></div>
+
+<h2 style="
+font-family:Cinzel;
+font-weight:500;
+letter-spacing:1px;
+color:white;
+">
+Connecting To Literary Club Portal...
+</h2>
+
+</div>
+
+`;
+
+loading.style=`
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#07111f;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999999;
+`;
+
+document.body.appendChild(loading);
+
+const style=document.createElement("style");
+
+style.innerHTML=`
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes popupFade{
+0%{
+opacity:0;
+transform:translateY(-30px);
+}
+15%{
+opacity:1;
+transform:translateY(0);
+}
+85%{
+opacity:1;
+transform:translateY(0);
+}
+100%{
+opacity:0;
+transform:translateY(-20px);
+}
+}
+
+`;
+
+document.head.appendChild(style);
+
+function showLoading(){
+loading.style.display="flex";
+}
+
+function hideLoading(){
+loading.style.display="none";
+}
+
+/* =========================================================
+   USERS
+========================================================= */
+
+const defaultUsers={
+
+head:{
+username:"head",
+password:"head123",
+role:"head",
+name:"Head Coordinator"
+},
+
+president:{
+username:"akshat",
+password:"president123",
+role:"president",
+name:"Akshat Singh"
+},
+
+vicePresident:{
+username:"akshata",
+password:"vice123",
+role:"vicePresident",
+name:"Akshata Ranjan"
+},
+
+secretary:{
+username:"ayush",
+password:"secretary123",
+role:"secretary",
+name:"Ayush Bharti"
+},
+
+eventCoordinator:{
+username:"aliya",
+password:"event123",
+role:"eventCoordinator",
+name:"Aliya Rachael"
+},
+
+committee1:{
+username:"ahaan",
+password:"committee123",
+role:"committee",
+name:"Ahaan"
+},
+
+committee2:{
+username:"vaishnavi",
+password:"committee456",
+role:"committee",
+name:"Vaishnavi"
+},
+
+member:{
+username:"member",
+password:"viewer123",
+role:"viewer",
+name:"Club Member"
+}
+
+};
+
+let users=
+JSON.parse(localStorage.getItem("users"))
+|| defaultUsers;
+
+/* =========================================================
+   CURRENT USER
+========================================================= */
+
+let currentUser=null;
+let currentRole=null;
+
+/* =========================================================
+   POWER CHECK
+========================================================= */
+
+function hasEditAccess(){
+
+return [
+
+"head",
+"president",
+"vicePresident",
+"secretary",
+"eventCoordinator"
+
+].includes(currentRole);
+
+}
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let members=
+JSON.parse(localStorage.getItem("members"))
+|| [];
+
+let events=
+JSON.parse(localStorage.getItem("events"))
+|| [];
+
+let archives=
+JSON.parse(localStorage.getItem("archives"))
+|| [];
+
+let messages=
+JSON.parse(localStorage.getItem("messages"))
+|| [];
+
+let files=
+JSON.parse(localStorage.getItem("files"))
+|| [];
+
+let seenNotifications=
+JSON.parse(localStorage.getItem("seenNotifications"))
+|| [];
+
+/* =========================================================
+   SAVE LOCAL
+========================================================= */
+
+function saveLocal(){
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+);
+
+localStorage.setItem(
+"members",
+JSON.stringify(members)
+);
+
+localStorage.setItem(
+"events",
+JSON.stringify(events)
+);
+
+localStorage.setItem(
+"archives",
+JSON.stringify(archives)
+);
+
+localStorage.setItem(
+"messages",
+JSON.stringify(messages)
+);
+
+localStorage.setItem(
+"files",
+JSON.stringify(files)
+);
+
+localStorage.setItem(
+"seenNotifications",
+JSON.stringify(seenNotifications)
+);
+
+}
+
+/* =========================================================
+   SAVE CLOUD
+========================================================= */
+
+async function saveCloudData(){
+
+try{
+
+showLoading();
+
+await setDoc(
+doc(db,"portal","main"),
+{
+users,
+members,
+events,
+archives,
+messages,
+files
+}
+);
+
+saveLocal();
+
+hideLoading();
+
+}catch(error){
+
+hideLoading();
+
+console.log(error);
+
+alert("Cloud Save Failed");
+
+}
+
+}
+
+/* =========================================================
+   LOAD CLOUD
+========================================================= */
+
+async function loadCloudData(){
+
+try{
+
+showLoading();
+
+const ref=doc(db,"portal","main");
+
+const snap=await getDoc(ref);
+
+if(snap.exists()){
+
+const data=snap.data();
+
+users=data.users || users;
+members=data.members || members;
+events=data.events || events;
+archives=data.archives || archives;
+messages=data.messages || messages;
+
+saveLocal();
+
+}
+
+}catch(error){
+
+console.log(error);
+
+alert(
+"Firebase Connection Failed. Open Portal Using Live Server."
+);
+
+}finally{
+
+hideLoading();
+
+}
+
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+window.login=async function(){
+
+let username=
+document.getElementById("username").value;
+
+let password=
+document.getElementById("password").value;
+
+await loadCloudData();
+
+let found=null;
+
+Object.keys(users).forEach(key=>{
+
+if(
+users[key].username===username
+&&
+users[key].password===password
+){
+
+found=key;
+
+}
+
+});
+
+if(found){
+
+currentUser=found;
+
+currentRole=users[found].role;
+
+localStorage.setItem(
+"currentUser",
+found
+);
+
+document.getElementById(
+"loginPage"
+).style.display="none";
+
+document.getElementById(
+"mainWebsite"
+).style.display="block";
+
+if(hasEditAccess()){
+
+document.getElementById(
+"adminFloating"
+).style.display="block";
+
+}
+
+renderMembers();
+renderEvents();
+renderMessages();
+renderFiles();
+showNotifications();
+addHistoryButton();
+
+}else{
+
+alert("Invalid Credentials");
+
+}
+
+}
+
+/* =========================================================
+   AUTO LOGIN
+========================================================= */
+
+window.onload=async function(){
+
+await loadCloudData();
+
+let user=
+localStorage.getItem("currentUser");
+
+if(user && users[user]){
+
+currentUser=user;
+
+currentRole=users[user].role;
+
+document.getElementById(
+"loginPage"
+).style.display="none";
+
+document.getElementById(
+"mainWebsite"
+).style.display="block";
+
+if(hasEditAccess()){
+
+document.getElementById(
+"adminFloating"
+).style.display="block";
+
+}
+
+renderMembers();
+renderEvents();
+renderMessages();
+renderFiles();
+showNotifications();
+addHistoryButton();
+
+}
+
+hideLoading();
+
+}
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+window.logout=function(){
+
+localStorage.removeItem(
+"currentUser"
+);
+
+location.reload();
+
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+window.openModal=function(title,body){
+
+document.getElementById(
+"modalTitle"
+).innerHTML=title;
+
+document.getElementById(
+"modalBody"
+).innerHTML=body;
+
+document.getElementById(
+"modal"
+).style.display="flex";
+
+}
+
+window.closeModal=function(){
+
+document.getElementById(
+"modal"
+).style.display="none";
+
+}
+
+window.outsideClose=function(e){
+
+if(e.target.id==="modal"){
+
+closeModal();
+
+}
+
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+window.toggleMobileMenu=function(){
+
+document.querySelector(
+".nav-links"
+).classList.toggle("active");
+
+}
+
+window.toggleAdminMenu=function(){
+
+let menu=
+document.getElementById("adminMenu");
+
+menu.style.display=
+menu.style.display==="block"
+? "none"
+: "block";
+
+}
+
+document.addEventListener("click",function(e){
+
+const nav=
+document.querySelector(".nav-links");
+
+const toggle=
+document.querySelector(".menu-toggle");
+
+if(nav && toggle){
+
+if(
+!nav.contains(e.target)
+&&
+!toggle.contains(e.target)
+){
+
+nav.classList.remove("active");
+
+}
+
+}
+
+const adminMenu=
+document.getElementById("adminMenu");
+
+const adminBtn=
+document.getElementById("adminFloating");
+
+if(adminMenu && adminBtn){
+
+if(
+!adminMenu.contains(e.target)
+&&
+!adminBtn.contains(e.target)
+){
+
+adminMenu.style.display="none";
+
+}
+
+}
+
+});
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+window.renderMembers=function(){
+
+const container=
+document.getElementById(
+"memberCards"
+);
+
+if(!container) return;
+
+container.innerHTML="";
+
+members.forEach((section,secIndex)=>{
+
+let list="";
+
+section.members.forEach((member,memIndex)=>{
+
+let controls="";
+
+if(hasEditAccess()){
+
+controls=`
+
+<span style="
+float:right;
+display:flex;
+gap:10px;
+">
+
+<span
+style="
+cursor:pointer;
+color:#d4b26a;
+"
+onclick="
+editMember(${secIndex},${memIndex})
+">
+✎
+</span>
+
+<span
+style="
+cursor:pointer;
+color:red;
+"
+onclick="
+deleteMember(${secIndex},${memIndex})
+">
+✖
+</span>
+
+</span>
+
+`;
+
+}
+
+list+=`
+
+<li>
+
+${member}
+
+${controls}
+
+</li>
+
+`;
+
+});
+
+container.innerHTML+=`
+
+<div class="card">
+
+<h3>${section.title}</h3>
+
+<ul>
+${list}
+</ul>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* =========================================================
+   MEMBER EDITOR
+========================================================= */
+
+window.openMemberEditor=function(){
+
+if(!hasEditAccess()) return;
+
+openModal(
+
+"Manage Members",
+
+`
+
+<input type="text"
+id="sectionName"
+placeholder="Section Name">
+
+<input type="text"
+id="memberName"
+placeholder="Member Name">
+
+<div class="modal-buttons">
+
+<button class="save-btn"
+onclick="saveMember()">
+Save
+</button>
+
+<button class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`
+
+);
+
+}
+
+window.saveMember=async function(){
+
+let section=
+document.getElementById(
+"sectionName"
+).value;
+
+let member=
+document.getElementById(
+"memberName"
+).value;
+
+if(!section || !member){
+
+alert("Fill all fields");
+
+return;
+
+}
+
+let found=
+members.find(x=>x.title===section);
+
+if(found){
+
+found.members.push(member);
+
+}else{
+
+members.push({
+title:section,
+members:[member]
+});
+
+}
+
+renderMembers();
+
+await saveCloudData();
+
+closeModal();
+
+}
+
+window.editMember=async function(sec,mem){
+
+let val=prompt(
+"Edit Member",
+members[sec].members[mem]
+);
+
+if(val){
+
+members[sec]
+.members[mem]=val;
+
+renderMembers();
+
+await saveCloudData();
+
+}
+
+}
+
+window.deleteMember=async function(sec,mem){
+
+if(confirm("Delete Member?")){
+
+members[sec]
+.members.splice(mem,1);
+
+renderMembers();
+
+await saveCloudData();
+
+}
+
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+window.openEventEditor=function(){
+
+if(!hasEditAccess()) return;
+
+openModal(
+
+"Add Event",
+
+`
+
+<input type="text"
+id="eventTitle"
+placeholder="Event Title">
+
+<textarea
+id="eventDesc"
+placeholder="Description">
+</textarea>
+
+<input type="text"
+id="eventImg"
+placeholder="Image URL">
+
+<div class="modal-buttons">
+
+<button class="save-btn"
+onclick="saveEvent()">
+Save
+</button>
+
+<button class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`
+
+);
+
+}
+
+window.saveEvent=async function(){
+
+events.push({
+
+title:
+document.getElementById(
+"eventTitle"
+).value,
+
+desc:
+document.getElementById(
+"eventDesc"
+).value,
+
+img:
+document.getElementById(
+"eventImg"
+).value,
+
+steps:[]
+
+});
+
+renderEvents();
+
+await saveCloudData();
+
+closeModal();
+
+}
+
+window.renderEvents=function(){
+
+let container=
+document.getElementById(
+"eventContainer"
+);
+
+if(!container) return;
+
+container.innerHTML="";
+
+events.forEach((event,index)=>{
+
+let total=event.steps.length;
+
+let done=
+event.steps.filter(
+x=>x.done
+).length;
+
+let percent=
+total===0
+? 0
+: (done/total)*100;
+
+let controls="";
+
+if(hasEditAccess()){
+
+controls=`
+
+<button
+class="action-btn edit-btn"
+onclick="manageProgress(${index})">
+Manage Progress
+</button>
+
+<button
+class="action-btn done-btn"
+onclick="archiveEvent(${index})">
+Archive
+</button>
+
+`;
+
+}
+
+container.innerHTML+=`
+
+<div class="event-card">
+
+<div class="event-img"
+style="
+background-image:url('${event.img}')
+">
+</div>
+
+<div class="event-content">
+
+<h3>${event.title}</h3>
+
+<p>${event.desc}</p>
+
+<div class="progress-bar">
+
+<div class="progress-fill"
+style="width:${percent}%;">
+</div>
+
+</div>
+
+<p style="margin-top:12px;">
+${done}/${total}
+Tasks Completed
+</p>
+
+${controls}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+window.manageProgress=function(index){
+
+let event=events[index];
+
+let html="";
+
+event.steps.forEach((step,i)=>{
+
+html+=`
+
+<div style="margin-bottom:15px;">
+
+<input type="checkbox"
+${step.done?"checked":""}
+onclick="
+toggleStep(${index},${i})
+">
+
+${step.name}
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+<input type="text"
+id="newStep"
+placeholder="New Step">
+
+<div class="modal-buttons">
+
+<button class="save-btn"
+onclick="addStep(${index})">
+Add
+</button>
+
+<button class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`;
+
+openModal(
+"Manage Event Progress",
+html
+);
+
+}
+
+window.addStep=async function(index){
+
+let val=
+document.getElementById(
+"newStep"
+).value;
+
+if(val){
+
+events[index]
+.steps.push({
+
+name:val,
+done:false
+
+});
+
+manageProgress(index);
+
+renderEvents();
+
+await saveCloudData();
+
+}
+
+}
+
+window.toggleStep=async function(eventIndex,stepIndex){
+
+events[eventIndex]
+.steps[stepIndex]
+.done=
+!events[eventIndex]
+.steps[stepIndex]
+.done;
+
+manageProgress(eventIndex);
+
+renderEvents();
+
+await saveCloudData();
+
+}
+
+window.archiveEvent=async function(index){
+
+archives.push(events[index]);
+
+events.splice(index,1);
+
+renderEvents();
+
+await saveCloudData();
+
+}
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+window.openArchive=function(){
+
+let html="";
+
+archives.forEach((event,index)=>{
+
+html+=`
+
+<div class="message-box">
+
+<h3>${event.title}</h3>
+
+<p style="margin-top:10px;">
+${event.desc}
+</p>
+
+<div style="
+display:flex;
+gap:10px;
+margin-top:20px;
+">
+
+<button
+class="action-btn done-btn"
+onclick="
+restoreArchive(${index})
+">
+Restore
+</button>
+
+<button
+class="action-btn delete-btn"
+onclick="
+deleteArchive(${index})
+">
+Delete
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+openModal(
+"Archived Events",
+html
+);
+
+}
+
+window.restoreArchive=async function(index){
+
+events.push(archives[index]);
+
+archives.splice(index,1);
+
+renderEvents();
+
+await saveCloudData();
+
+openArchive();
+
+}
+
+window.deleteArchive=async function(index){
+
+archives.splice(index,1);
+
+await saveCloudData();
+
+openArchive();
+
+}
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+window.openMessageEditor=function(){
+
+if(!hasEditAccess()) return;
+
+let options="";
+
+Object.keys(users).forEach(key=>{
+
+if(key!=="member"){
+
+options+=`
+
+<option value="${key}">
+${users[key].name}
+</option>
+
+`;
+
+}
+
+});
+
+openModal(
+
+"Send Message",
+
+`
+
+<input type="text"
+id="msgTitle"
+placeholder="Message Title">
+
+<textarea
+id="msgBody"
+placeholder="Write Message">
+</textarea>
+
+<select id="msgTo">
+
+<option value="all">
+All Committee Members
+</option>
+
+${options}
+
+</select>
+
+<div class="modal-buttons">
+
+<button class="save-btn"
+onclick="sendMessage()">
+Send
+</button>
+
+<button class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`
+
+);
+
+}
+
+window.sendMessage=async function(){
+
+let now=new Date();
+
+let time=
+now.toLocaleDateString()
++
+" | "
++
+now.toLocaleTimeString();
+
+messages.unshift({
+
+title:
+document.getElementById(
+"msgTitle"
+).value,
+
+message:
+document.getElementById(
+"msgBody"
+).value,
+
+to:
+document.getElementById(
+"msgTo"
+).value,
+
+from:
+users[currentUser].name,
+
+time:time,
+
+id:Date.now()
+
+});
+
+renderMessages();
+
+await saveCloudData();
+
+closeModal();
+
+}
+
+window.renderMessages=function(){
+
+let container=
+document.getElementById(
+"messageContainer"
+);
+
+if(!container) return;
+
+container.innerHTML="";
+
+let filtered=
+messages.filter(msg=>
+
+msg.to==="all"
+||
+msg.to===currentUser
+
+);
+
+document.getElementById(
+"notifyCount"
+).innerHTML=
+filtered.length;
+
+filtered.forEach((msg,index)=>{
+
+container.innerHTML+=`
+
+<div class="message-box">
+
+<h3>${msg.title}</h3>
+
+<p style="margin-top:12px;">
+${msg.message}
+</p>
+
+<p style="
+margin-top:15px;
+font-size:13px;
+color:#ccc;
+">
+
+From : ${msg.from}
+
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* =========================================================
+   MESSAGE HISTORY
+========================================================= */
+
+window.openMessageHistory=function(){
+
+if(currentRole!=="head"){
+
+alert(
+"Only Head Can Access"
+);
+
+return;
+
+}
+
+let html="";
+
+messages.forEach(msg=>{
+
+let receiver=
+msg.to==="all"
+? "All"
+: users[msg.to]
+? users[msg.to].name
+: msg.to;
+
+html+=`
+
+<div class="log-line">
+
+<div>
+<span>${msg.from}</span>
+→
+${receiver}
+</div>
+
+<div>
+${msg.time}
+</div>
+
+</div>
+
+`;
+
+});
+
+openModal(
+"Message History",
+html
+);
+
+}
+
+window.addHistoryButton=function(){
+
+if(currentRole!=="head")
+return;
+
+const menu=
+document.getElementById(
+"adminMenu"
+);
+
+if(
+document.getElementById(
+"historyBtn"
+)
+) return;
+
+menu.innerHTML+=`
+
+<button
+id="historyBtn"
+onclick="openMessageHistory()">
+Message History
+</button>
+
+`;
+
+}
+
+/* =========================================================
+   FILE STORAGE
+========================================================= */
+
+window.openFileManager=function(){
+
+let uploadSection="";
+
+if(hasEditAccess()){
+
+uploadSection=`
+
+<input type="file"
+id="fileUpload">
+
+`;
+
+}
+
+let html=`
+
+${uploadSection}
+
+<div id="allFiles">
+
+`;
+
+files.forEach((file,index)=>{
+
+html+=`
+
+<div class="message-box">
+
+<h3>${file.name}</h3>
+
+<p style="
+margin-top:10px;
+font-size:13px;
+color:#bbb;
+">
+
+Uploaded By :
+${file.by}
+
+</p>
+
+<a
+href="${file.url}"
+target="_blank"
+style="
+color:#d4b26a;
+display:inline-block;
+margin-top:15px;
+">
+
+Open File
+
+</a>
+
+`;
+
+if(hasEditAccess()){
+
+html+=`
+
+<div style="margin-top:15px;">
+
+<button
+class="action-btn delete-btn"
+onclick="
+deleteFile(${index})
+">
+Delete
+</button>
+
+</div>
+
+`;
+
+}
+
+html+=`</div>`;
+
+});
+
+html+=`</div>`;
+
+if(hasEditAccess()){
+
+html+=`
+
+<div class="modal-buttons">
+
+<button
+class="save-btn"
+onclick="uploadFile()">
+Upload
+</button>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`;
+
+}
+
+openModal(
+"Club Files",
+html
+);
+
+}
+
+window.uploadFile=async function(){
+
+const fileInput=
+document.getElementById(
+"fileUpload"
+);
+
+const file=
+fileInput.files[0];
+
+if(!file){
+
+alert("Choose File");
+
+return;
+
+}
+
+const reader=
+new FileReader();
+
+reader.onload=async function(e){
+
+files.unshift({
+
+name:file.name,
+url:e.target.result,
+by:users[currentUser].name
+
+});
+
+await saveCloudData();
+
+renderFiles();
+
+openFileManager();
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+window.renderFiles=function(){
+
+}
+
+window.deleteFile=async function(index){
+
+if(confirm("Delete File?")){
+
+files.splice(index,1);
+
+await saveCloudData();
+
+openFileManager();
+
+}
+
+}
+
+/* =========================================================
+   PUSH NOTIFICATION
+========================================================= */
+
+function showPopup(text){
+
+const popup=
+document.createElement("div");
+
+popup.innerHTML=text;
+
+popup.style=`
+
+position:fixed;
+top:25px;
+right:25px;
+background:rgba(10,18,30,.97);
+border-left:4px solid #d4b26a;
+padding:18px 22px;
+border-radius:18px;
+z-index:999999;
+font-size:15px;
+backdrop-filter:blur(14px);
+animation:popupFade 3s forwards;
+box-shadow:0 10px 30px rgba(0,0,0,.45);
+
+`;
+
+document.body.appendChild(popup);
+
+setTimeout(()=>{
+
+popup.remove();
+
+},3000);
+
+}
+
+function showNotifications(){
+
+let myMessages=
+messages.filter(msg=>
+
+(
+msg.to===currentUser
+||
+msg.to==="all"
+)
+
+&&
+
+!seenNotifications.includes(msg.id)
+
+);
+
+myMessages.forEach(msg=>{
+
+showPopup(
+`📩 ${msg.title}`
+);
+
+seenNotifications.push(msg.id);
+
+});
+
+saveLocal();
+
+}
+
+/* =========================================================
+   FINGERPRINT AUTH
+========================================================= */
+
+window.enableFingerprint=function(){
+
+if(
+window.PublicKeyCredential
+){
+
+alert(
+"Fingerprint Authentication Enabled For This Device"
+);
+
+localStorage.setItem(
+"fingerprintEnabled",
+"yes"
+);
+
+}else{
+
+alert(
+"Fingerprint Not Supported"
+);
+
+}
+
+}
+
+/* =========================================================
+   CREDENTIALS
+========================================================= */
+
+window.openCredentialManager=function(){
+
+if(currentRole!=="head"){
+
+alert(
+"Only Head Can Change Credentials"
+);
+
+return;
+
+}
+
+let options="";
+
+Object.keys(users).forEach(key=>{
+
+options+=`
+
+<option value="${key}">
+${users[key].name}
+</option>
+
+`;
+
+});
+
+openModal(
+
+"Manage Credentials",
+
+`
+
+<select id="credentialUser">
+
+${options}
+
+</select>
+
+<input type="text"
+id="newUsername"
+placeholder="New Username">
+
+<input type="password"
+id="newPassword"
+placeholder="New Password">
+
+<div class="modal-buttons">
+
+<button
+class="save-btn"
+onclick="saveCredentials()">
+Save
+</button>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+`
+
+);
+
+}
+
+window.saveCredentials=async function(){
+
+let selected=
+document.getElementById(
+"credentialUser"
+).value;
+
+let newUsername=
+document.getElementById(
+"newUsername"
+).value;
+
+let newPassword=
+document.getElementById(
+"newPassword"
+).value;
+
+users[selected].username=
+newUsername;
+
+users[selected].password=
+newPassword;
+
+await saveCloudData();
+
+closeModal();
+
+alert(
+"Credentials Updated"
+);
+
+}
+
+/* =========================================================
+   INBOX SCROLL
+========================================================= */
+
+window.openInbox=function(){
+
+document.getElementById(
+"messages"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+/* =========================================================
+   END
+========================================================= */
+
+</script>
+</body>
+
+</html>
